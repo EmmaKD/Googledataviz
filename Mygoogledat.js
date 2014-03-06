@@ -19,43 +19,43 @@
 
 //I am trying to construct an array of arrays
 //
-	var mygoogleDatavizArray = [];
+	var googlevizArray = [];
 
 //These are my headers
 	
-	var mygoogleheaderArray = ["Date", "value"];
+	var vizheaderArray = ["Date", "value"];
 	
 		
-	mygoogleDatavizArray.push(headerArray);
+	googlevizArray.push(vizheaderArray);
 
 //this is the pointer to my observations array
-	var mygoogleObsData = Mygoogledat.observations;
+	var googleObsData = Mygoogledat.observations;
 	
 		//to create the visualization I need to convert the Json data
 		//to an array of arrays using a for loop
-	for (var i = 0; i < mygoogleObsData.length; i++) {
+	for (var i = 0; i < googleObsData.length; i++) {
 	
-	var dataLoaded = mygoogleObsData[i];
-	var newArray = [dataLoaded.date, Number(dataLoaded.value)];
-	myDataArray.push(newArray);
+	var dataLoaded = googleObsData[i];
+	var newvizArray = [dataLoaded.date, Number(dataLoaded.value)];
+	googlevizArray.push(newvizArray);
 	
-	var myDataTable = google.visualization.arrayToDataTable(myDataArray);
+	var myDataTable = google.visualization.arrayToDataTable(googlevizArray);
 	
 	var options = {
           title: 'Unemployment rate'
         };
 	}
-//console.log(myDataArray);
+//console.log(mygooglevizArray);
 
 
-function googleVizLoaded(){
+function mygooglevizLoaded(){
 	
-google.load("visualization", "1", {packages:["corechart"],callback : "googleVizLoaded"});
+google.load("visualization", "1", {packages:["corechart"],callback : "mygooglevizLoaded"});
 
 
 function dataLoaded() {
 
-	console.log(myObsData);
+	console.log(googleObsData);
 
 	
 }
@@ -63,16 +63,16 @@ function dataLoaded() {
 
 	
 		//create reference to current object in list
-		var currObj = myObsData[i]
+		var latestObj = googleObsData[i]
 
-		var currArray = [currObj.date, Number(currObj.value)];
+		var latestArray = [latestObj.date, Number(latestObj.value)];
 
-		myDataArray.push(currArray);
+		googlevizArray.push(latestArray);
 
 		//end for loop
 	}
 	
-	console.log(myDataArray);
+	console.log(googlevizArray);
 	
 	
 	//feed data to visualization library
@@ -80,8 +80,8 @@ function dataLoaded() {
 	
 	
 	//tell it to create a column chart
-	var myChart = new google.visualization.LineChart(document.getElementById("myChartDiv"));
-	myChart.draw(myDataTable);
+	var googleChart = new google.visualization.LineChart(document.getElementById('my_Chart'));
+	googleChart.draw(myDataTable);
 }
 
 function googleLoaded() {
