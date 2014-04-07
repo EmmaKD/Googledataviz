@@ -19,60 +19,63 @@
 
 //I am trying to construct an array of arrays
 //
-	var googlevizArray = [];
+	var gvizArray = [];
 
 //These are my headers
 	
 	var vizheaderArray = ["Date", "value"];
 	
 		
-	googlevizArray.push(vizheaderArray);
+	gvizArray.push(vizheaderArray);
 
 //this is the pointer to my observations array
-	var googleObsData = Mygoogledat.observations;
+	var gObsData = Mygoogledat.observations;
 	
 		//to create the visualization I need to convert the Json data
 		//to an array of arrays using a for loop
-	for (var i = 0; i < googleObsData.length; i++) {
+	for (var i = 0; i < gObsData.length; i++) {
 	
-	var dataLoaded = googleObsData[i];
+	//this function is to tell the computer that of my various variables that I have in my json library 
+	//I need data and value in such a way that this should appear in the x axis and y axis
+	var dataLoaded = gObsData[i];
 	var newvizArray = [dataLoaded.date, Number(dataLoaded.value)];
-	googlevizArray.push(newvizArray);
 	
-	var myDataTable = google.visualization.arrayToDataTable(googlevizArray);
 	
+	//this will put my data array into my data list
+	gvizArray.push(newvizArray);
+	
+	var iDataTable = google.visualization.arrayToDataTable(gvizArray);
+	
+	//this will be the title of ny chart
 	var options = {
           title: 'Unemployment rate'
         };
 	}
 //console.log(mygooglevizArray);
 
-
-function mygooglevizLoaded(){
+//this is to define a new callback fucntion data chart
+function mygvizLoaded(){
 	
-google.load("visualization", "1", {packages:["corechart"],callback : "mygooglevizLoaded"});
-
+google.load("visualization", "1", {packages:["corechart"],callback : "mygvizLoaded"});
 
 function dataLoaded() {
 
-	console.log(googleObsData);
+	console.log(gObsData);
 
 	
-}
+}	
 	
-
-	
-		//create reference to current object in list
-		var latestObj = googleObsData[i]
+		//create reference to current object in the list
+		var latestObj = gObsData[i]
 
 		var latestArray = [latestObj.date, Number(latestObj.value)];
 
-		googlevizArray.push(latestArray);
+		gvizArray.push(latestArray);
 
 		//end for loop
 	}
 	
-	console.log(googlevizArray);
+	console.log(gvizArray);
 	
 	
 	//feed data to visualization library
@@ -81,7 +84,7 @@ function dataLoaded() {
 	
 	//tell it to create a column chart
 	var googleChart = new google.visualization.LineChart(document.getElementById('my_Chart'));
-	googleChart.draw(myDataTable);
+	googleChart.draw(iDataTable);
 }
 
 function googleLoaded() {
@@ -99,19 +102,17 @@ function pageLoad() {
 
 	console.log("go to page loaded");
 
-	//this loads the google visualization library
+	//this is the google chart load function
+	//which in addition to having a property will add the callback function and the data chart.
 	google.load("visualization", '1', {
 		packages : ["corechart"],
 		callback : "googleLoaded"
 	}); 
 	
 
-	//
-
 	
-
 }
 
-
+//this is the document ready function and data source which is the name of my callback
 $(document).ready(pageLoad);
 
